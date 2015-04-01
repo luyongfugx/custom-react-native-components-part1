@@ -11,43 +11,24 @@
 @implementation MCFileWriterUtil
 
 
-NSString * convertDictToJsonString(NSDictionary *dict) {
-    
-    NSData *jsonData = [NSJSONSerialization
-                            dataWithJSONObject : dict
-                            options            : NSJSONWritingPrettyPrinted
-                            error              : nil
-                       ];
-    
-    
-    return [[NSString alloc]
-                initWithData : jsonData
-                encoding     : NSUTF8StringEncoding
-           ];
-}
-
-
 // Persist data
 - (void) writeFile:(NSString *)fileName
             withContents:(NSString *)contents
             errorCallback:(RCTResponseSenderBlock)failureCallback
             callback:(RCTResponseSenderBlock)successCallback {
     
-    // #Step 1
     RCT_EXPORT();
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
-    NSString *resultJsonString;
-    
     if ([fileName length] < 1) {
         // Craft a failure message
-        resultJsonString = convertDictToJsonString(@{
+        NSDictionary *resultsDict = @{
             @"success" : @NO,
             @"errMsg"  : @"No file name."
-        });
+        };
         
         // Execute the JavaScript failure callback handler
-        failureCallback(@[resultJsonString]);
+        failureCallback(@[resultsDict]);
         
         return; // Halt execution of this function
     }
@@ -69,32 +50,32 @@ NSString * convertDictToJsonString(NSDictionary *dict) {
     // Here we save contents to disk by executing the writeToFile method of 
     // the fileContents String, which is the first argument to this function.
     [contents writeToFile : fileName
-                  atomically  : NO
-                  encoding    : NSStringEncodingConversionAllowLossy
-                  error       : &writeError];
+                  atomically : NO
+                  encoding   : NSStringEncodingConversionAllowLossy
+                  error      : &writeError];
 
 
     // Error Condition handling
     if (writeError) {
         // Craft a failure message
-        resultJsonString = convertDictToJsonString(@{
+        NSDictionary *resultsDict = @{
             @"success" : @NO,
             @"errMsg"  : [writeError localizedDescription]
-        });
+        };
         
         // Execute the JavaScript failure callback handler
-        failureCallback(@[resultJsonString]);
+        failureCallback(@[resultsDict]);
     }
     // Success handling
     else {
     
         // Craft a success return message
-        resultJsonString = convertDictToJsonString(@{
+        NSDictionary *resultsDict = @{
             @"success" : @YES
-        });
+        };
         
         // Call the JavaScript sucess handler
-        successCallback(@[resultJsonString]);
+        successCallback(@[resultsDict]);
     }
 }
 
@@ -104,23 +85,20 @@ NSString * convertDictToJsonString(NSDictionary *dict) {
 // Load data from disk and return the String.
 - (void) readFile:(NSString *)fileName
             errorCallback:(RCTResponseSenderBlock)failureCallback
-            callback:(__unused RCTResponseSenderBlock)successCallback {
+            callback:(RCTResponseSenderBlock)successCallback {
 
-    // #Step 1
     RCT_EXPORT();
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
-    NSString *resultJsonString;
-    
     if ([fileName length] < 1) {
         // Craft a failure message
-        resultJsonString = convertDictToJsonString(@{
+        NSDictionary *resultsDict = @{
             @"success" : @NO,
             @"errMsg"  : @"No file name."
-        });
+        };
         
         // Execute the JavaScript failure callback handler
-        failureCallback(@[resultJsonString]);
+        failureCallback(@[resultsDict]);
         
         return; // Halt execution of this function
     }
@@ -150,25 +128,24 @@ NSString * convertDictToJsonString(NSDictionary *dict) {
     // Error Condition handling
     if (readError) {
         // Craft a failure message
-        resultJsonString = convertDictToJsonString(@{
+        NSDictionary *resultsDict = @{
             @"success" : @NO,
             @"errMsg"  : [readError localizedDescription]
-        });
+        };
         
         // Execute the JavaScript failure callback handler
-        failureCallback(@[resultJsonString]);
+        failureCallback(@[resultsDict]);
     }
     // Success handling
     else {
-    
         // Craft a success return message
-        resultJsonString = convertDictToJsonString(@{
-            @"success" : @YES,
+        NSDictionary *resultsDict = @{
+            @"success"  : @YES,
             @"contents" : fileContents
-        });
+        };
         
         // Call the JavaScript sucess handler
-        successCallback(@[resultJsonString]);
+        successCallback(@[resultsDict]);
     }
 
 

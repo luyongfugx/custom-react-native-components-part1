@@ -19,27 +19,6 @@ var {
     MCFileWriterUtil
 } = require('NativeModules');
 
-// // Step #1
-// (function() {
-//     var fileContents = Math.random().toString();
-
-//     // MCFileWriterUtil.writeFile(
-//     MCFileWriterUtil.readFile(
-//         'MyFile.txt',
-//         // fileContents,
-//         function errorCallback(results) {
-//             results = JSON.parse(results);
-
-//             // alert('Error: ' + results.errMsg);
-//         },
-//         function successCallback(results) {
-//             results = JSON.parse(results);
-
-//             // alert('Success : ' + results.contents);
-//         }
-//     );
-// })();
-
 
 
 var CustomComponent = React.createClass({
@@ -60,12 +39,9 @@ var CustomComponent = React.createClass({
             fileName,
             fileContents,
             function errorCallback(results) {
-                results = JSON.parse(results);
-
                 alert('Error: ' + results.errMsg);
             },
             function successCallback(results) {
-                results = JSON.parse(results);
                 var resultsText = 'Saved to ' + fileName + '. Press load to see contents.';
 
                 me.setState({
@@ -79,14 +55,13 @@ var CustomComponent = React.createClass({
         MCFileWriterUtil.readFile(
             me.textInputValue,
             function errorCallback(results) {
-                results = JSON.parse(results);
+                debugger
 
                 alert('Error: ' + results.errMsg);
             },
             function successCallback(results) {
-                results = JSON.parse(results);
-                var resultsText = 'Contents of ' + me.textInputValue 
-                                + ' ' + results.contents;
+                var resultsText = 'Contents of ' + me.textInputValue + ' ' + results.contents;
+               
                 me.setState({
                     resultsText : resultsText
                 });

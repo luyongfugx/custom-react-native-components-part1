@@ -14,11 +14,11 @@
 		<string>github.com:ModusCreateOrg/custom-react-native-components-part1.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CustomComponent.xcodeproj</string>
+	<string>Phase2/CustomComponent.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5DDCBE8E9564055639764D1322805ADCD31B4164</key>
-		<string>../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:ModusCreateOrg/custom-react-native-components-part1.git</string>

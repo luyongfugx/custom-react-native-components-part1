@@ -21,7 +21,7 @@
     RCT_EXPORT();
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
-    successCallback(@[@"Write method called"]);
+    successCallback(@[@{ @"key" : @"Write method called"}]);
 }
 
             
