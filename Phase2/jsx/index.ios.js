@@ -15,7 +15,9 @@ var {
 } = React;
 
 
+
 var {
+    // Demand in the auto-generated JavaScript class for our ObjC class
     MCFileWriterUtil
 } = require('NativeModules');
 
@@ -24,16 +26,18 @@ var {
 var CustomComponent = React.createClass({
     textInputValue : null,
     
+    // Generate the initial state of the view.
     getInitialState : function() {
         return {
             resultsText : 'Nothing has happened yet :('
         }
     },
 
+    // Executed when the TouchableHighlight "Save" button is pressed
     onSavePress : function() {
-        var me           = this,
-            fileName     = this.textInputValue,
-            fileContents = Math.random().toString();
+        var me           = this,                     // Context reference for the callbacks
+            fileName     = this.textInputValue,      // What file name to write?
+            fileContents = Math.random().toString(); // This goes into the file
 
         MCFileWriterUtil.writeFile(
             fileName,
@@ -43,25 +47,28 @@ var CustomComponent = React.createClass({
             },
             function successCallback(results) {
                 var resultsText = 'Saved to ' + fileName + '. Press load to see contents.';
-
+                
+                // Update the state of the view
                 me.setState({
                     resultsText : resultsText
                 });
             }
         );
     },
-    onLoadPress : function() {
-        var me = this;
-        MCFileWriterUtil.readFile(
-            me.textInputValue,
-            function errorCallback(results) {
-                debugger
 
+    // Executed when the TouchableHighlight "Load" button is pressed
+    onLoadPress : function() {
+        var me = this;                              // Context reference for the callbacks
+
+        MCFileWriterUtil.readFile(
+            me.textInputValue,                      // File name to read from
+            function errorCallback(results) {
                 alert('Error: ' + results.errMsg);
             },
             function successCallback(results) {
-                var resultsText = 'Contents of ' + me.textInputValue + ' ' + results.contents;
+                var resultsText = 'Contents of ' + me.textInputValue + ': ' + results.contents;
                
+                // Update the state of the view
                 me.setState({
                     resultsText : resultsText
                 });
@@ -70,6 +77,7 @@ var CustomComponent = React.createClass({
 
     },
     
+    // Handler for the TextInput onChange event
     onTextInputChange : function(event) {
         this.textInputValue = event.nativeEvent.text;
     },
@@ -84,7 +92,6 @@ var CustomComponent = React.createClass({
                 </Text>
                 <View style={styles.separator}/>
 
-
                 <View style={styles.labelContainer}>
                     <Text style={styles.labelText}>
                         File Name : 
@@ -97,6 +104,7 @@ var CustomComponent = React.createClass({
                         onChange={this.onTextInputChange}
                     />
                 </View>
+
                 <View style={styles.buttonContainer}> 
                     <TouchableHighlight 
                         style={styles.touchableHighlight} 
@@ -119,18 +127,16 @@ var CustomComponent = React.createClass({
                                 </View>
                     </TouchableHighlight>
                 </View>
+                
                 <View style={styles.outputContainer}>
                     <Text style={styles.outputText} ref="outputContainer">
                         {state.resultsText}
                     </Text>
-
                 </View>
 
-             
-            
             </View>
         );
-      }
+    }
 });
 
 var styles = StyleSheet.create({    
@@ -159,8 +165,8 @@ var styles = StyleSheet.create({
     },
 
     labelText : {
-        paddingRight   : 10,
-        fontSize       : 18
+        paddingRight : 10,
+        fontSize     : 18
     },
     
     textInput : {
@@ -173,16 +179,17 @@ var styles = StyleSheet.create({
     },
 
     buttonContainer : {
-        flexDirection : 'row',
-        justifyContent  : 'center',
-        alignItems      : 'center',
-        marginTop       : 20
+        flexDirection  : 'row',
+        justifyContent : 'center',
+        alignItems     : 'center',
+        marginTop      : 20
     },
+    
     touchableHighlight : {
-        marginLeft : 10,
-        marginRight
-         : 10,
+        marginLeft  : 10,
+        marginRight : 10,
     },
+    
     buttonBox : {
         flexDirection  : 'row',
         justifyContent : 'center',
@@ -195,6 +202,7 @@ var styles = StyleSheet.create({
     saveButtonBox : {
         borderColor : '#AA0000'
     },
+
     loadButtonBox : {
         borderColor : '#00AA00'
     },
