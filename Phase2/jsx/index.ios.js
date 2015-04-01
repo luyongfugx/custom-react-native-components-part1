@@ -1,7 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 
 var React = require('react-native');
@@ -87,24 +83,26 @@ var CustomComponent = React.createClass({
 
         return (
             <View style={styles.container}>
+
+                {/*  Title container */}
                 <Text style={styles.instructionsText}>
                     Custom React Native Utility Demo
                 </Text>
                 <View style={styles.separator}/>
 
+                {/*  Container for input field */}
                 <View style={styles.labelContainer}>
                     <Text style={styles.labelText}>
                         File Name : 
                     </Text>
                     <TextInput
-                        placeHolder="Test placeHolder"
-                        autoCapitalize="sentences"
                         style={styles.textInput}
                         ref="textInput"
                         onChange={this.onTextInputChange}
                     />
                 </View>
 
+                {/*  Container for isave and load buttons */}
                 <View style={styles.buttonContainer}> 
                     <TouchableHighlight 
                         style={styles.touchableHighlight} 
@@ -128,6 +126,7 @@ var CustomComponent = React.createClass({
                     </TouchableHighlight>
                 </View>
                 
+                {/*  Container for an output view */}
                 <View style={styles.outputContainer}>
                     <Text style={styles.outputText} ref="outputContainer">
                         {state.resultsText}
