@@ -48,7 +48,7 @@
     NSError *writeError;
     
     // Here we save contents to disk by executing the writeToFile method of 
-    // the fileContents String, which is the first argument to this function.
+    // the contents String, which is the second argument to this function.
     [contents writeToFile : fileName
                   atomically : NO
                   encoding   : NSStringEncodingConversionAllowLossy
@@ -147,8 +147,6 @@
         // Call the JavaScript sucess handler
         successCallback(@[resultsDict]);
     }
-
-
 }
 
 @end
