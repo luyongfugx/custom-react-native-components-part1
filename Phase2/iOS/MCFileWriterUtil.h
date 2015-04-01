@@ -6,16 +6,16 @@
 //  Copyright (c) 2015 Facebook. All rights reserved.
 //
 
-#import "RCTViewManager.h"
+#import  "RCTBridge.h"
 
-@interface MCFileWriterUtil : RCTViewManager
+@interface MCFileWriterUtil : NSObject <RCTBridgeModule>
 
 
 #pragma mark - Util_Methods
 
 // Persist data
 - (void) writeFile:(NSString *)fileName
-//            withContents:(NSString *)contents
+            withContents:(NSString *)contents
             errorCallback:(RCTResponseSenderBlock)failureCallback
             callback:(__unused RCTResponseSenderBlock)successCallback;
 
