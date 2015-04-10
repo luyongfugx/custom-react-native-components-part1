@@ -13,17 +13,5 @@
 
 #pragma mark - Util_Methods
 
-// Persist data
-- (void) writeFile:(NSString *)fileName
-            withContents:(NSString *)contents
-            errorCallback:(RCTResponseSenderBlock)failureCallback
-            callback:(RCTResponseSenderBlock)successCallback;
-
-
-// Load data from disk and return the String.
-- (void) readFile:(NSString *)fileName
-            errorCallback:(RCTResponseSenderBlock)failureCallback
-            callback:(RCTResponseSenderBlock)successCallback;
-
 
 @end

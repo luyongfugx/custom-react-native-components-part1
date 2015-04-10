@@ -11,13 +11,15 @@
 @implementation MCFileWriterUtil
 
 
+RCT_EXPORT_MODULE()
+
+
 // Persist data
-- (void) writeFile:(NSString *)fileName
-            withContents:(NSString *)contents
-            errorCallback:(RCTResponseSenderBlock)failureCallback
-            callback:(RCTResponseSenderBlock)successCallback {
+RCT_EXPORT_METHOD(writeFile:(NSString *)fileName
+                    withContents:(NSString *)contents
+                    errorCallback:(RCTResponseSenderBlock)failureCallback
+                    callback:(RCTResponseSenderBlock)successCallback) {
     
-    RCT_EXPORT();
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     if ([fileName length] < 1) {
@@ -83,11 +85,10 @@
 
 
 // Load data from disk and return the String.
-- (void) readFile:(NSString *)fileName
-            errorCallback:(RCTResponseSenderBlock)failureCallback
-            callback:(RCTResponseSenderBlock)successCallback {
+RCT_EXPORT_METHOD(readFile:(NSString *)fileName
+                    errorCallback:(RCTResponseSenderBlock)failureCallback
+                    callback:(RCTResponseSenderBlock)successCallback) {
 
-    RCT_EXPORT();
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
     if ([fileName length] < 1) {

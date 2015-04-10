@@ -10,32 +10,31 @@
 
 @implementation MCFileWriterUtil
 
+RCT_EXPORT_MODULE()
+
 
 // Persist data
-- (void) writeFile:(NSString *)fileName
-            withContents:(NSString *)contents
-            errorCallback:(RCTResponseSenderBlock)failureCallback
-            callback:(RCTResponseSenderBlock)successCallback {
+RCT_EXPORT_METHOD(writeFile:(NSString *)fileName
+                    withContents:(NSString *)contents
+                    errorCallback:(RCTResponseSenderBlock)failureCallback
+                    callback:(RCTResponseSenderBlock)successCallback) {
     
     // #Step 1
-    RCT_EXPORT();
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
-    successCallback(@[@{ @"key" : @"Write method called"}]);
+    successCallback(@[@"Write method called"]);
 }
 
             
 // Load data from disk and return the String.
-- (void) readFile:(NSString *)fileName
-            errorCallback:(RCTResponseSenderBlock)failureCallback
-            callback:(__unused RCTResponseSenderBlock)successCallback {
+RCT_EXPORT_METHOD(readFile:(NSString *)fileName
+                    errorCallback:(RCTResponseSenderBlock)failureCallback
+                    callback:(RCTResponseSenderBlock)successCallback) {
 
     // #Step 1
-    RCT_EXPORT();
     NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
     successCallback(@[@"Read method called"]);
-
 }
 
 @end
