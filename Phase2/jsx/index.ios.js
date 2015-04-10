@@ -31,21 +31,22 @@ var CustomComponent = React.createClass({
 
     // Executed when the TouchableHighlight "Save" button is pressed
     onSavePress : function() {
-        var me           = this,                     // Context reference for the callbacks
-            fileName     = this.textInputValue,      // What file name to write?
+        var fileName     = this.textInputValue,      // What file name to write?
             fileContents = Math.random().toString(); // This goes into the file
 
         MCFileWriterUtil.writeFile(
             fileName,
             fileContents,
-            function errorCallback(results) {
+            // errorCallback
+            (results) => {
                 alert('Error: ' + results.errMsg);
             },
-            function successCallback(results) {
+            // successCallback
+            (results) => {
                 var resultsText = 'Saved to ' + fileName + '. Press load to see contents.';
                 
                 // Update the state of the view
-                me.setState({
+                this.setState({
                     resultsText : resultsText
                 });
             }
@@ -54,18 +55,21 @@ var CustomComponent = React.createClass({
 
     // Executed when the TouchableHighlight "Load" button is pressed
     onLoadPress : function() {
-        var me = this;                              // Context reference for the callbacks
-
+        // File name from text input
+        var fileName = this.textInputValue; 
+        
         MCFileWriterUtil.readFile(
-            me.textInputValue,                      // File name to read from
-            function errorCallback(results) {
+            fileName,                     
+            //errorCallback
+            (results) => {
                 alert('Error: ' + results.errMsg);
             },
-            function successCallback(results) {
-                var resultsText = 'Contents of ' + me.textInputValue + ': ' + results.contents;
+            // successCallback
+            (results) => {
+                var resultsText = 'Contents of ' + fileName + ': ' + results.contents;
                
                 // Update the state of the view
-                me.setState({
+                this.setState({
                     resultsText : resultsText
                 });
             }

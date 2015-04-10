@@ -12,7 +12,6 @@
 
 RCT_EXPORT_MODULE()
 
-
 // Persist data
 RCT_EXPORT_METHOD(writeFile:(NSString *)fileName
                     withContents:(NSString *)contents
